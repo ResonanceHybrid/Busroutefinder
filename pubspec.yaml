@@ -1,0 +1,25 @@
+name: bus_route_finder
+description: A Flutter app for finding bus routes with map integration.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_map: ^6.0.1
+
+  latlong2: 0.9.1
+  geolocator: ^10.1.0
+  permission_handler: ^11.0.1
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
