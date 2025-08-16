@@ -119,7 +119,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
   final MapController _mapController = MapController();
   final TextEditingController _fromController = TextEditingController();
   final TextEditingController _toController = TextEditingController();
-  
+
   LatLng? _currentLocation;
   LatLng? _fromLocation;
   LatLng? _destination;
@@ -129,7 +129,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
   bool _showRouteResults = false;
   bool _useCurrentLocation = true;
   int _selectedRouteIndex = 0;
-  
+
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -157,7 +157,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
       parent: _animationController,
       curve: Curves.easeInOut,
     );
-    
+
     _initializeBusStops();
     _getCurrentLocation();
   }
@@ -165,90 +165,440 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
   void _initializeBusStops() {
     _busStops = [
       // Route 1: Lagankhel-Naya Buspark
-      BusStop(name: "Gongabu Buspark", position: LatLng(27.735138, 85.308082), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 1),
-      BusStop(name: "Gongabu Chowk", position: LatLng(27.7349404, 85.3146154), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 2),
-      BusStop(name: "Samakhusi", position: LatLng(27.735021, 85.316453), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 3),
-      BusStop(name: "Talim Kendra", position: LatLng(27.736980, 85.323375), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 4),
-      BusStop(name: "Basundhara", position: LatLng(27.742141, 85.332581), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 6),
-      BusStop(name: "Teaching Hospital", position: LatLng(27.734582, 85.330886), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 9),
-      BusStop(name: "Panipokhari", position: LatLng(27.729587, 85.324845), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 10),
-      BusStop(name: "Lazimpat", position: LatLng(27.724606, 85.322329), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 11),
-      BusStop(name: "Jamal", position: LatLng(27.707002, 85.314218), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 13),
-      BusStop(name: "Tripureshwor", position: LatLng(27.69371, 85.31416), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 16),
-      BusStop(name: "Pulchowk", position: LatLng(27.680773, 85.317357), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 20),
-      BusStop(name: "Jawalakhel", position: LatLng(27.67292, 85.31371), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 21),
-      BusStop(name: "Lagankhel", position: LatLng(27.666915, 85.323038), routeId: "1", routeName: "Lagankhel-Naya Buspark", stopOrder: 23),
+      BusStop(
+          name: "Gongabu Buspark",
+          position: LatLng(27.735138, 85.308082),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 1),
+      BusStop(
+          name: "Gongabu Chowk",
+          position: LatLng(27.7349404, 85.3146154),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 2),
+      BusStop(
+          name: "Samakhusi",
+          position: LatLng(27.735021, 85.316453),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 3),
+      BusStop(
+          name: "Talim Kendra",
+          position: LatLng(27.736980, 85.323375),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 4),
+      BusStop(
+          name: "Basundhara",
+          position: LatLng(27.742141, 85.332581),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 6),
+      BusStop(
+          name: "Teaching Hospital",
+          position: LatLng(27.734582, 85.330886),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 9),
+      BusStop(
+          name: "Panipokhari",
+          position: LatLng(27.729587, 85.324845),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 10),
+      BusStop(
+          name: "Lazimpat",
+          position: LatLng(27.724606, 85.322329),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 11),
+      BusStop(
+          name: "Jamal",
+          position: LatLng(27.707002, 85.314218),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 13),
+      BusStop(
+          name: "Tripureshwor",
+          position: LatLng(27.69371, 85.31416),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 16),
+      BusStop(
+          name: "Pulchowk",
+          position: LatLng(27.680773, 85.317357),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 20),
+      BusStop(
+          name: "Jawalakhel",
+          position: LatLng(27.67292, 85.31371),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 21),
+      BusStop(
+          name: "Lagankhel",
+          position: LatLng(27.666915, 85.323038),
+          routeId: "1",
+          routeName: "Lagankhel-Naya Buspark",
+          stopOrder: 23),
 
       // Route 2: Ratnapark-Bhaktapur
-      BusStop(name: "Ratnapark", position: LatLng(27.7065, 85.3137), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 1),
-      BusStop(name: "Bhotahity", position: LatLng(27.7045, 85.3125), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 2),
-      BusStop(name: "Bagbazar", position: LatLng(27.7089, 85.3098), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 3),
-      BusStop(name: "Dillibazar", position: LatLng(27.7156, 85.3201), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 4),
-      BusStop(name: "Gaushala", position: LatLng(27.7201, 85.3289), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 5),
-      BusStop(name: "Chabahil", position: LatLng(27.7267, 85.3445), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 6),
-      BusStop(name: "Jorpati", position: LatLng(27.7398, 85.3612), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 7),
-      BusStop(name: "Mulpani", position: LatLng(27.7456, 85.3789), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 8),
-      BusStop(name: "Thimi", position: LatLng(27.6789, 85.3901), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 9),
-      BusStop(name: "Bhaktapur", position: LatLng(27.6710, 85.4298), routeId: "2", routeName: "Ratnapark-Bhaktapur", stopOrder: 10),
+      BusStop(
+          name: "Ratnapark",
+          position: LatLng(27.7065, 85.3137),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 1),
+      BusStop(
+          name: "Bhotahity",
+          position: LatLng(27.7045, 85.3125),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 2),
+      BusStop(
+          name: "Bagbazar",
+          position: LatLng(27.7089, 85.3098),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 3),
+      BusStop(
+          name: "Dillibazar",
+          position: LatLng(27.7156, 85.3201),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 4),
+      BusStop(
+          name: "Gaushala",
+          position: LatLng(27.7201, 85.3289),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 5),
+      BusStop(
+          name: "Chabahil",
+          position: LatLng(27.7267, 85.3445),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 6),
+      BusStop(
+          name: "Jorpati",
+          position: LatLng(27.7398, 85.3612),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 7),
+      BusStop(
+          name: "Mulpani",
+          position: LatLng(27.7456, 85.3789),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 8),
+      BusStop(
+          name: "Thimi",
+          position: LatLng(27.6789, 85.3901),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 9),
+      BusStop(
+          name: "Bhaktapur",
+          position: LatLng(27.6710, 85.4298),
+          routeId: "2",
+          routeName: "Ratnapark-Bhaktapur",
+          stopOrder: 10),
 
       // Route 3: RNAC-Dhungin
-      BusStop(name: "RNAC", position: LatLng(27.7132, 85.3240), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 1),
-      BusStop(name: "Jamal", position: LatLng(27.707002, 85.314218), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 2),
-      BusStop(name: "Tripureshwor", position: LatLng(27.69371, 85.31416), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 5),
-      BusStop(name: "Pulchowk", position: LatLng(27.680773, 85.317357), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 9),
-      BusStop(name: "Jawalakhel", position: LatLng(27.67292, 85.31371), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 10),
-      BusStop(name: "Lagankhel", position: LatLng(27.666915, 85.323038), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 12),
-      BusStop(name: "Gwarko", position: LatLng(27.6732666, 85.3135375), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 15),
-      BusStop(name: "Imadol", position: LatLng(27.6849132, 85.2986117), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 18),
-      BusStop(name: "Dhungin", position: LatLng(27.6726494, 85.3132419), routeId: "3", routeName: "RNAC-Dhungin", stopOrder: 29),
+      BusStop(
+          name: "RNAC",
+          position: LatLng(27.7132, 85.3240),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 1),
+      BusStop(
+          name: "Jamal",
+          position: LatLng(27.707002, 85.314218),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 2),
+      BusStop(
+          name: "Tripureshwor",
+          position: LatLng(27.69371, 85.31416),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 5),
+      BusStop(
+          name: "Pulchowk",
+          position: LatLng(27.680773, 85.317357),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 9),
+      BusStop(
+          name: "Jawalakhel",
+          position: LatLng(27.67292, 85.31371),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 10),
+      BusStop(
+          name: "Lagankhel",
+          position: LatLng(27.666915, 85.323038),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 12),
+      BusStop(
+          name: "Gwarko",
+          position: LatLng(27.6732666, 85.3135375),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 15),
+      BusStop(
+          name: "Imadol",
+          position: LatLng(27.6849132, 85.2986117),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 18),
+      BusStop(
+          name: "Dhungin",
+          position: LatLng(27.6726494, 85.3132419),
+          routeId: "3",
+          routeName: "RNAC-Dhungin",
+          stopOrder: 29),
 
       // Route 4: Ring Road Express
-      BusStop(name: "Kalanki", position: LatLng(27.6936, 85.2795), routeId: "4", routeName: "Ring Road Express", stopOrder: 1),
-      BusStop(name: "Kalimati", position: LatLng(27.6998, 85.2889), routeId: "4", routeName: "Ring Road Express", stopOrder: 2),
-      BusStop(name: "Teku", position: LatLng(27.6945, 85.3067), routeId: "4", routeName: "Ring Road Express", stopOrder: 3),
-      BusStop(name: "Tripureshwor", position: LatLng(27.69371, 85.31416), routeId: "4", routeName: "Ring Road Express", stopOrder: 4),
-      BusStop(name: "Thapathali", position: LatLng(27.69065, 85.31738), routeId: "4", routeName: "Ring Road Express", stopOrder: 5),
-      BusStop(name: "Baneshwor", position: LatLng(27.6895, 85.3456), routeId: "4", routeName: "Ring Road Express", stopOrder: 6),
-      BusStop(name: "Tinkune", position: LatLng(27.6789, 85.3567), routeId: "4", routeName: "Ring Road Express", stopOrder: 7),
-      BusStop(name: "Koteshwor", position: LatLng(27.6678, 85.3445), routeId: "4", routeName: "Ring Road Express", stopOrder: 8),
-      BusStop(name: "Balkumari", position: LatLng(27.6534, 85.3198), routeId: "4", routeName: "Ring Road Express", stopOrder: 9),
-      BusStop(name: "Ekantakuna", position: LatLng(27.6723, 85.2987), routeId: "4", routeName: "Ring Road Express", stopOrder: 10),
+      BusStop(
+          name: "Kalanki",
+          position: LatLng(27.6936, 85.2795),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 1),
+      BusStop(
+          name: "Kalimati",
+          position: LatLng(27.6998, 85.2889),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 2),
+      BusStop(
+          name: "Teku",
+          position: LatLng(27.6945, 85.3067),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 3),
+      BusStop(
+          name: "Tripureshwor",
+          position: LatLng(27.69371, 85.31416),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 4),
+      BusStop(
+          name: "Thapathali",
+          position: LatLng(27.69065, 85.31738),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 5),
+      BusStop(
+          name: "Baneshwor",
+          position: LatLng(27.6895, 85.3456),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 6),
+      BusStop(
+          name: "Tinkune",
+          position: LatLng(27.6789, 85.3567),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 7),
+      BusStop(
+          name: "Koteshwor",
+          position: LatLng(27.6678, 85.3445),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 8),
+      BusStop(
+          name: "Balkumari",
+          position: LatLng(27.6534, 85.3198),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 9),
+      BusStop(
+          name: "Ekantakuna",
+          position: LatLng(27.6723, 85.2987),
+          routeId: "4",
+          routeName: "Ring Road Express",
+          stopOrder: 10),
 
       // Route 5: Budhanilkantha Express
-      BusStop(name: "Budhanilkantha", position: LatLng(27.7623, 85.3698), routeId: "5", routeName: "Budhanilkantha Express", stopOrder: 1),
-      BusStop(name: "Tokha", position: LatLng(27.7456, 85.3567), routeId: "5", routeName: "Budhanilkantha Express", stopOrder: 2),
-      BusStop(name: "Maharajgunj", position: LatLng(27.7345, 85.3456), routeId: "5", routeName: "Budhanilkantha Express", stopOrder: 3),
-      BusStop(name: "Chakrapath", position: LatLng(27.7298, 85.3389), routeId: "5", routeName: "Budhanilkantha Express", stopOrder: 4),
-      BusStop(name: "Bansbari", position: LatLng(27.7234, 85.3301), routeId: "5", routeName: "Budhanilkantha Express", stopOrder: 5),
-      BusStop(name: "Durbarmarg", position: LatLng(27.7089, 85.3178), routeId: "5", routeName: "Budhanilkantha Express", stopOrder: 6),
-      BusStop(name: "Ratnapark", position: LatLng(27.7065, 85.3137), routeId: "5", routeName: "Budhanilkantha Express", stopOrder: 7),
+      BusStop(
+          name: "Budhanilkantha",
+          position: LatLng(27.7623, 85.3698),
+          routeId: "5",
+          routeName: "Budhanilkantha Express",
+          stopOrder: 1),
+      BusStop(
+          name: "Tokha",
+          position: LatLng(27.7456, 85.3567),
+          routeId: "5",
+          routeName: "Budhanilkantha Express",
+          stopOrder: 2),
+      BusStop(
+          name: "Maharajgunj",
+          position: LatLng(27.7345, 85.3456),
+          routeId: "5",
+          routeName: "Budhanilkantha Express",
+          stopOrder: 3),
+      BusStop(
+          name: "Chakrapath",
+          position: LatLng(27.7298, 85.3389),
+          routeId: "5",
+          routeName: "Budhanilkantha Express",
+          stopOrder: 4),
+      BusStop(
+          name: "Bansbari",
+          position: LatLng(27.7234, 85.3301),
+          routeId: "5",
+          routeName: "Budhanilkantha Express",
+          stopOrder: 5),
+      BusStop(
+          name: "Durbarmarg",
+          position: LatLng(27.7089, 85.3178),
+          routeId: "5",
+          routeName: "Budhanilkantha Express",
+          stopOrder: 6),
+      BusStop(
+          name: "Ratnapark",
+          position: LatLng(27.7065, 85.3137),
+          routeId: "5",
+          routeName: "Budhanilkantha Express",
+          stopOrder: 7),
 
       // Route 6: Nepal Yatayat
-      BusStop(name: "Old Buspark", position: LatLng(27.7056, 85.3089), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 1),
-      BusStop(name: "Asan", position: LatLng(27.7045, 85.3098), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 2),
-      BusStop(name: "Indrachowk", position: LatLng(27.7034, 85.3067), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 3),
-      BusStop(name: "Basantapur", position: LatLng(27.7023, 85.3045), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 4),
-      BusStop(name: "Bhotebahal", position: LatLng(27.6998, 85.3023), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 5),
-      BusStop(name: "Sundhara", position: LatLng(27.6967, 85.3134), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 6),
-      BusStop(name: "Babarmahal", position: LatLng(27.6934, 85.3178), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 7),
-      BusStop(name: "Singhadurbar", position: LatLng(27.6912, 85.3198), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 8),
-      BusStop(name: "Baneshwor", position: LatLng(27.6895, 85.3456), routeId: "6", routeName: "Nepal Yatayat", stopOrder: 9),
+      BusStop(
+          name: "Old Buspark",
+          position: LatLng(27.7056, 85.3089),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 1),
+      BusStop(
+          name: "Asan",
+          position: LatLng(27.7045, 85.3098),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 2),
+      BusStop(
+          name: "Indrachowk",
+          position: LatLng(27.7034, 85.3067),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 3),
+      BusStop(
+          name: "Basantapur",
+          position: LatLng(27.7023, 85.3045),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 4),
+      BusStop(
+          name: "Bhotebahal",
+          position: LatLng(27.6998, 85.3023),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 5),
+      BusStop(
+          name: "Sundhara",
+          position: LatLng(27.6967, 85.3134),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 6),
+      BusStop(
+          name: "Babarmahal",
+          position: LatLng(27.6934, 85.3178),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 7),
+      BusStop(
+          name: "Singhadurbar",
+          position: LatLng(27.6912, 85.3198),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 8),
+      BusStop(
+          name: "Baneshwor",
+          position: LatLng(27.6895, 85.3456),
+          routeId: "6",
+          routeName: "Nepal Yatayat",
+          stopOrder: 9),
 
       // Additional Route 7: Kirtipur-Ratnapark
-      BusStop(name: "Kirtipur", position: LatLng(27.6789, 85.2798), routeId: "7", routeName: "Kirtipur-Ratnapark", stopOrder: 1),
-      BusStop(name: "Naikap", position: LatLng(27.6834, 85.2856), routeId: "7", routeName: "Kirtipur-Ratnapark", stopOrder: 2),
-      BusStop(name: "Kalanki", position: LatLng(27.6936, 85.2795), routeId: "7", routeName: "Kirtipur-Ratnapark", stopOrder: 3),
-      BusStop(name: "Kalimati", position: LatLng(27.6998, 85.2889), routeId: "7", routeName: "Kirtipur-Ratnapark", stopOrder: 4),
-      BusStop(name: "Teku", position: LatLng(27.6945, 85.3067), routeId: "7", routeName: "Kirtipur-Ratnapark", stopOrder: 5),
-      BusStop(name: "Ratnapark", position: LatLng(27.7065, 85.3137), routeId: "7", routeName: "Kirtipur-Ratnapark", stopOrder: 6),
+      BusStop(
+          name: "Kirtipur",
+          position: LatLng(27.6789, 85.2798),
+          routeId: "7",
+          routeName: "Kirtipur-Ratnapark",
+          stopOrder: 1),
+      BusStop(
+          name: "Naikap",
+          position: LatLng(27.6834, 85.2856),
+          routeId: "7",
+          routeName: "Kirtipur-Ratnapark",
+          stopOrder: 2),
+      BusStop(
+          name: "Kalanki",
+          position: LatLng(27.6936, 85.2795),
+          routeId: "7",
+          routeName: "Kirtipur-Ratnapark",
+          stopOrder: 3),
+      BusStop(
+          name: "Kalimati",
+          position: LatLng(27.6998, 85.2889),
+          routeId: "7",
+          routeName: "Kirtipur-Ratnapark",
+          stopOrder: 4),
+      BusStop(
+          name: "Teku",
+          position: LatLng(27.6945, 85.3067),
+          routeId: "7",
+          routeName: "Kirtipur-Ratnapark",
+          stopOrder: 5),
+      BusStop(
+          name: "Ratnapark",
+          position: LatLng(27.7065, 85.3137),
+          routeId: "7",
+          routeName: "Kirtipur-Ratnapark",
+          stopOrder: 6),
 
       // Additional Route 8: Patan-Swayambhu
-      BusStop(name: "Mangal Bazar", position: LatLng(27.6731, 85.3242), routeId: "8", routeName: "Patan-Swayambhu", stopOrder: 1),
-      BusStop(name: "Lagankhel", position: LatLng(27.666915, 85.323038), routeId: "8", routeName: "Patan-Swayambhu", stopOrder: 2),
-      BusStop(name: "Pulchowk", position: LatLng(27.680773, 85.317357), routeId: "8", routeName: "Patan-Swayambhu", stopOrder: 3),
-      BusStop(name: "Thapathali", position: LatLng(27.69065, 85.31738), routeId: "8", routeName: "Patan-Swayambhu", stopOrder: 4),
-      BusStop(name: "Ratnapark", position: LatLng(27.7065, 85.3137), routeId: "8", routeName: "Patan-Swayambhu", stopOrder: 5),
-      BusStop(name: "Swayambhu", position: LatLng(27.7145, 85.2913), routeId: "8", routeName: "Patan-Swayambhu", stopOrder: 6),
+      BusStop(
+          name: "Mangal Bazar",
+          position: LatLng(27.6731, 85.3242),
+          routeId: "8",
+          routeName: "Patan-Swayambhu",
+          stopOrder: 1),
+      BusStop(
+          name: "Lagankhel",
+          position: LatLng(27.666915, 85.323038),
+          routeId: "8",
+          routeName: "Patan-Swayambhu",
+          stopOrder: 2),
+      BusStop(
+          name: "Pulchowk",
+          position: LatLng(27.680773, 85.317357),
+          routeId: "8",
+          routeName: "Patan-Swayambhu",
+          stopOrder: 3),
+      BusStop(
+          name: "Thapathali",
+          position: LatLng(27.69065, 85.31738),
+          routeId: "8",
+          routeName: "Patan-Swayambhu",
+          stopOrder: 4),
+      BusStop(
+          name: "Ratnapark",
+          position: LatLng(27.7065, 85.3137),
+          routeId: "8",
+          routeName: "Patan-Swayambhu",
+          stopOrder: 5),
+      BusStop(
+          name: "Swayambhu",
+          position: LatLng(27.7145, 85.2913),
+          routeId: "8",
+          routeName: "Patan-Swayambhu",
+          stopOrder: 6),
     ];
   }
 
@@ -300,7 +650,8 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
 
     setState(() {
       _fromSuggestions = _busStops
-          .where((stop) => stop.name.toLowerCase().contains(query.toLowerCase()))
+          .where(
+              (stop) => stop.name.toLowerCase().contains(query.toLowerCase()))
           .toSet()
           .take(5)
           .toList();
@@ -319,7 +670,8 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
 
     setState(() {
       _toSuggestions = _busStops
-          .where((stop) => stop.name.toLowerCase().contains(query.toLowerCase()))
+          .where(
+              (stop) => stop.name.toLowerCase().contains(query.toLowerCase()))
           .toSet()
           .take(5)
           .toList();
@@ -330,63 +682,66 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
   // Enhanced route finding algorithm that covers all routes
   List<RouteResult> _findAllOptimalRoutes(String destinationQuery) {
     if (_fromLocation == null) return [];
-    
+
     List<RouteResult> allRoutes = [];
     DateTime now = DateTime.now();
-    
+
     // Find all destination stops that match the query
     List<BusStop> destinationStops = _busStops
-        .where((stop) => stop.name.toLowerCase().contains(destinationQuery.toLowerCase()))
+        .where((stop) =>
+            stop.name.toLowerCase().contains(destinationQuery.toLowerCase()))
         .toList();
-    
+
     if (destinationStops.isEmpty) return [];
-    
+
     // For each destination stop, find all possible routes
     for (BusStop destStop in destinationStops) {
       // Direct routes (single bus line)
       allRoutes.addAll(_findDirectRoutes(destStop, now));
-      
+
       // Transfer routes (connecting through other stops)
       allRoutes.addAll(_findTransferRoutes(destStop, now));
     }
-    
+
     // Remove duplicates and sort by efficiency
     allRoutes = _removeDuplicateRoutes(allRoutes);
-    allRoutes.sort((a, b) => _calculateRouteScore(a).compareTo(_calculateRouteScore(b)));
-    
+    allRoutes.sort(
+        (a, b) => _calculateRouteScore(a).compareTo(_calculateRouteScore(b)));
+
     return allRoutes.take(5).toList(); // Return top 5 routes
   }
 
   List<RouteResult> _findDirectRoutes(BusStop destStop, DateTime now) {
     List<RouteResult> directRoutes = [];
-    
+
     // Get all stops on the same route as destination
     List<BusStop> routeStops = _busStops
         .where((stop) => stop.routeId == destStop.routeId)
         .toList()
       ..sort((a, b) => a.stopOrder.compareTo(b.stopOrder));
-    
+
     // Find nearest boarding stop
     BusStop? bestBoardingStop;
     double minWalkDistance = double.infinity;
-    
+
     for (BusStop stop in routeStops) {
       if (stop.stopOrder < destStop.stopOrder) {
         double walkDistance = _calculateDistance(_fromLocation!, stop.position);
-        if (walkDistance <= _maxWalkingDistance && walkDistance < minWalkDistance) {
+        if (walkDistance <= _maxWalkingDistance &&
+            walkDistance < minWalkDistance) {
           minWalkDistance = walkDistance;
           bestBoardingStop = stop;
         }
       }
     }
-    
+
     if (bestBoardingStop != null) {
       List<BusStop> pathStops = routeStops
-          .where((stop) => 
-              stop.stopOrder >= bestBoardingStop!.stopOrder && 
+          .where((stop) =>
+              stop.stopOrder >= bestBoardingStop!.stopOrder &&
               stop.stopOrder <= destStop.stopOrder)
           .toList();
-      
+
       RouteSegment segment = RouteSegment(
         startStop: bestBoardingStop,
         endStop: destStop,
@@ -396,7 +751,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         travelTime: _calculateBusTime(bestBoardingStop, destStop),
         distance: _calculateRouteDistance(pathStops),
       );
-      
+
       directRoutes.add(_createRouteResult(
         segments: [segment],
         startLocation: _fromLocation!,
@@ -405,37 +760,38 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         hasTransfer: false,
       ));
     }
-    
+
     return directRoutes;
   }
 
   List<RouteResult> _findTransferRoutes(BusStop destStop, DateTime now) {
     List<RouteResult> transferRoutes = [];
-    
+
     // Get all routes that don't contain the destination
     Set<String> otherRouteIds = _busStops
         .map((stop) => stop.routeId)
         .where((id) => id != destStop.routeId)
         .toSet();
-    
+
     for (String routeId in otherRouteIds) {
       List<BusStop> firstRouteStops = _busStops
           .where((stop) => stop.routeId == routeId)
           .toList()
         ..sort((a, b) => a.stopOrder.compareTo(b.stopOrder));
-      
+
       // Find nearest boarding stop on first route
       BusStop? firstBoardingStop;
       double minWalkToFirst = double.infinity;
-      
+
       for (BusStop stop in firstRouteStops) {
         double walkDistance = _calculateDistance(_fromLocation!, stop.position);
-        if (walkDistance <= _maxWalkingDistance && walkDistance < minWalkToFirst) {
+        if (walkDistance <= _maxWalkingDistance &&
+            walkDistance < minWalkToFirst) {
           minWalkToFirst = walkDistance;
           firstBoardingStop = stop;
         }
       }
-      
+
       if (firstBoardingStop != null) {
         // Find transfer points (stops with same or similar names on different routes)
         for (BusStop transferCandidate in firstRouteStops) {
@@ -444,33 +800,33 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
             List<BusStop> destRouteStops = _busStops
                 .where((stop) => stop.routeId == destStop.routeId)
                 .toList();
-            
+
             for (BusStop destRouteStop in destRouteStops) {
               double transferDistance = _calculateDistance(
-                transferCandidate.position, 
-                destRouteStop.position
-              );
-              
+                  transferCandidate.position, destRouteStop.position);
+
               // If stops are very close (within 300m) or have similar names, consider as transfer
-              bool isTransferPoint = transferDistance <= 300 || 
+              bool isTransferPoint = transferDistance <= 300 ||
                   _areSimilarStops(transferCandidate.name, destRouteStop.name);
-              
-              if (isTransferPoint && destRouteStop.stopOrder < destStop.stopOrder) {
+
+              if (isTransferPoint &&
+                  destRouteStop.stopOrder < destStop.stopOrder) {
                 // Create transfer route
                 List<BusStop> firstSegmentStops = firstRouteStops
-                    .where((stop) => 
-                        stop.stopOrder >= firstBoardingStop!.stopOrder && 
+                    .where((stop) =>
+                        stop.stopOrder >= firstBoardingStop!.stopOrder &&
                         stop.stopOrder <= transferCandidate.stopOrder)
                     .toList();
-                
+
                 List<BusStop> secondSegmentStops = destRouteStops
-                    .where((stop) => 
-                        stop.stopOrder >= destRouteStop.stopOrder && 
+                    .where((stop) =>
+                        stop.stopOrder >= destRouteStop.stopOrder &&
                         stop.stopOrder <= destStop.stopOrder)
                     .toList()
                   ..sort((a, b) => a.stopOrder.compareTo(b.stopOrder));
-                
-                if (firstSegmentStops.isNotEmpty && secondSegmentStops.isNotEmpty) {
+
+                if (firstSegmentStops.isNotEmpty &&
+                    secondSegmentStops.isNotEmpty) {
                   List<RouteSegment> segments = [
                     RouteSegment(
                       startStop: firstBoardingStop,
@@ -478,7 +834,8 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                       routeName: transferCandidate.routeName,
                       routeId: transferCandidate.routeId,
                       pathStops: firstSegmentStops,
-                      travelTime: _calculateBusTime(firstBoardingStop, transferCandidate),
+                      travelTime: _calculateBusTime(
+                          firstBoardingStop, transferCandidate),
                       distance: _calculateRouteDistance(firstSegmentStops),
                     ),
                     RouteSegment(
@@ -491,7 +848,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                       distance: _calculateRouteDistance(secondSegmentStops),
                     ),
                   ];
-                  
+
                   transferRoutes.add(_createRouteResult(
                     segments: segments,
                     startLocation: _fromLocation!,
@@ -507,7 +864,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         }
       }
     }
-    
+
     return transferRoutes;
   }
 
@@ -515,17 +872,17 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
     // Simple similarity check - can be enhanced with more sophisticated algorithms
     name1 = name1.toLowerCase().replaceAll(' ', '');
     name2 = name2.toLowerCase().replaceAll(' ', '');
-    
+
     // Check if names are exactly the same
     if (name1 == name2) return true;
-    
+
     // Check if one name contains the other
     if (name1.contains(name2) || name2.contains(name1)) return true;
-    
+
     // Check for common words
     List<String> words1 = name1.split(' ');
     List<String> words2 = name2.split(' ');
-    
+
     for (String word1 in words1) {
       for (String word2 in words2) {
         if (word1.length > 3 && word2.length > 3 && word1 == word2) {
@@ -533,21 +890,23 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         }
       }
     }
-    
+
     return false;
   }
 
   int _calculateBusTime(BusStop start, BusStop end) {
     int stopDifference = (end.stopOrder - start.stopOrder).abs();
-    return math.max(5, stopDifference * 2); // Minimum 5 minutes, 2 minutes per stop
+    return math.max(
+        5, stopDifference * 2); // Minimum 5 minutes, 2 minutes per stop
   }
 
   double _calculateRouteDistance(List<BusStop> stops) {
     if (stops.length < 2) return 0;
-    
+
     double totalDistance = 0;
     for (int i = 0; i < stops.length - 1; i++) {
-      totalDistance += _calculateDistance(stops[i].position, stops[i + 1].position);
+      totalDistance +=
+          _calculateDistance(stops[i].position, stops[i + 1].position);
     }
     return totalDistance;
   }
@@ -561,43 +920,52 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
     BusStop? transferStop,
   }) {
     // Calculate walking distances
-    double walkToFirstStop = _calculateDistance(startLocation, segments.first.startStop.position);
-    double walkFromLastStop = _calculateDistance(segments.last.endStop.position, endLocation);
-    
+    double walkToFirstStop =
+        _calculateDistance(startLocation, segments.first.startStop.position);
+    double walkFromLastStop =
+        _calculateDistance(segments.last.endStop.position, endLocation);
+
     // Calculate times
-    int walkingTime = ((walkToFirstStop + walkFromLastStop) / _walkingSpeed).round();
+    int walkingTime =
+        ((walkToFirstStop + walkFromLastStop) / _walkingSpeed).round();
     int busTime = segments.fold(0, (sum, segment) => sum + segment.travelTime);
-    int waitingTime = _averageWaitTime * segments.length; // Wait time for each bus
+    int waitingTime =
+        _averageWaitTime * segments.length; // Wait time for each bus
     int transferTime = hasTransfer ? _transferPenalty : 0;
     int totalTime = walkingTime + busTime + waitingTime + transferTime;
-    
+
     // Calculate distances
     double totalWalkingDistance = walkToFirstStop + walkFromLastStop;
-    double totalBusDistance = segments.fold(0, (sum, segment) => sum + segment.distance);
-    
+    double totalBusDistance =
+        segments.fold(0, (sum, segment) => sum + segment.distance);
+
     // Generate description and instructions
     String routeDescription;
     String instructions;
-    
+
     if (hasTransfer) {
-      routeDescription = "${segments.first.routeName} → ${segments.last.routeName}";
-      instructions = _generateTransferInstructions(segments, walkToFirstStop, walkFromLastStop);
+      routeDescription =
+          "${segments.first.routeName} → ${segments.last.routeName}";
+      instructions = _generateTransferInstructions(
+          segments, walkToFirstStop, walkFromLastStop);
     } else {
       routeDescription = segments.first.routeName;
-      instructions = _generateDirectInstructions(segments.first, walkToFirstStop, walkFromLastStop);
+      instructions = _generateDirectInstructions(
+          segments.first, walkToFirstStop, walkFromLastStop);
     }
-    
+
     // Calculate times
     String startTime = "${now.hour}:${now.minute.toString().padLeft(2, '0')}";
     DateTime endDateTime = now.add(Duration(minutes: totalTime));
-    String endTime = "${endDateTime.hour}:${endDateTime.minute.toString().padLeft(2, '0')}";
-    
+    String endTime =
+        "${endDateTime.hour}:${endDateTime.minute.toString().padLeft(2, '0')}";
+
     // Collect all stops
     List<BusStop> allStops = [];
     for (RouteSegment segment in segments) {
       allStops.addAll(segment.pathStops);
     }
-    
+
     return RouteResult(
       segments: segments,
       allStops: allStops,
@@ -618,55 +986,58 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
     );
   }
 
-  String _generateDirectInstructions(RouteSegment segment, double walkToStop, double walkFromStop) {
+  String _generateDirectInstructions(
+      RouteSegment segment, double walkToStop, double walkFromStop) {
     int walkToStopMin = (walkToStop / _walkingSpeed).round();
     int walkFromStopMin = (walkFromStop / _walkingSpeed).round();
-    
+
     return "Walk ${walkToStopMin} min to ${segment.startStop.name} → "
-           "Take ${segment.routeName} to ${segment.endStop.name} → "
-           "Walk ${walkFromStopMin} min to destination";
+        "Take ${segment.routeName} to ${segment.endStop.name} → "
+        "Walk ${walkFromStopMin} min to destination";
   }
 
-  String _generateTransferInstructions(List<RouteSegment> segments, double walkToStop, double walkFromStop) {
+  String _generateTransferInstructions(
+      List<RouteSegment> segments, double walkToStop, double walkFromStop) {
     int walkToStopMin = (walkToStop / _walkingSpeed).round();
     int walkFromStopMin = (walkFromStop / _walkingSpeed).round();
-    
+
     return "Walk ${walkToStopMin} min to ${segments.first.startStop.name} → "
-           "Take ${segments.first.routeName} to ${segments.first.endStop.name} → "
-           "Transfer to ${segments.last.routeName} → "
-           "Get off at ${segments.last.endStop.name} → "
-           "Walk ${walkFromStopMin} min to destination";
+        "Take ${segments.first.routeName} to ${segments.first.endStop.name} → "
+        "Transfer to ${segments.last.routeName} → "
+        "Get off at ${segments.last.endStop.name} → "
+        "Walk ${walkFromStopMin} min to destination";
   }
 
   List<RouteResult> _removeDuplicateRoutes(List<RouteResult> routes) {
     Map<String, RouteResult> uniqueRoutes = {};
-    
+
     for (RouteResult route in routes) {
-      String key = route.routeDescription + 
-                   route.segments.first.startStop.name + 
-                   route.segments.last.endStop.name;
-      
-      if (!uniqueRoutes.containsKey(key) || 
+      String key = route.routeDescription +
+          route.segments.first.startStop.name +
+          route.segments.last.endStop.name;
+
+      if (!uniqueRoutes.containsKey(key) ||
           uniqueRoutes[key]!.totalTime > route.totalTime) {
         uniqueRoutes[key] = route;
       }
     }
-    
+
     return uniqueRoutes.values.toList();
   }
 
   double _calculateRouteScore(RouteResult route) {
     // Scoring system: lower is better
     double score = route.totalTime.toDouble();
-    
+
     // Penalties
     if (route.hasTransfer) score += 15; // Transfer penalty
-    if (route.totalWalkingDistance > 1000) score += (route.totalWalkingDistance - 1000) / 100; // Long walk penalty
-    
+    if (route.totalWalkingDistance > 1000)
+      score += (route.totalWalkingDistance - 1000) / 100; // Long walk penalty
+
     // Bonuses
     if (route.totalWalkingDistance < 500) score -= 5; // Short walk bonus
     if (!route.hasTransfer) score -= 5; // Direct route bonus
-    
+
     return score;
   }
 
@@ -677,19 +1048,20 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
       );
       return;
     }
-    
+
     setState(() {
       _isLoading = true;
       _showRouteResults = false;
       _showFromSuggestions = false;
       _showToSuggestions = false;
     });
-    
+
     // Find destination
     List<BusStop> matchingStops = _busStops
-        .where((stop) => stop.name.toLowerCase().contains(_toController.text.toLowerCase()))
+        .where((stop) =>
+            stop.name.toLowerCase().contains(_toController.text.toLowerCase()))
         .toList();
-    
+
     if (matchingStops.isEmpty) {
       setState(() {
         _isLoading = false;
@@ -699,10 +1071,10 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
       );
       return;
     }
-    
+
     // Use the first matching stop for destination marker
     BusStop destStop = matchingStops.first;
-    
+
     setState(() {
       _destination = destStop.position;
       _routeResults = _findAllOptimalRoutes(_toController.text);
@@ -710,12 +1082,14 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
       _showRouteResults = true;
       _selectedRouteIndex = 0;
     });
-    
+
     _animationController.forward();
-    
+
     if (_destination != null && _fromLocation != null) {
-      LatLngBounds bounds = LatLngBounds.fromPoints([_fromLocation!, _destination!]);
-      _mapController.fitCamera(CameraFit.bounds(bounds: bounds, padding: EdgeInsets.all(50)));
+      LatLngBounds bounds =
+          LatLngBounds.fromPoints([_fromLocation!, _destination!]);
+      _mapController.fitCamera(
+          CameraFit.bounds(bounds: bounds, padding: EdgeInsets.all(50)));
     }
   }
 
@@ -724,11 +1098,11 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
       String temp = _fromController.text;
       _fromController.text = _toController.text;
       _toController.text = temp;
-      
+
       LatLng? tempLocation = _fromLocation;
       _fromLocation = _destination;
       _destination = tempLocation;
-      
+
       _useCurrentLocation = false;
     });
   }
@@ -737,15 +1111,16 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
     setState(() {
       _selectedRouteIndex = index;
     });
-    
+
     if (_routeResults.isNotEmpty) {
       RouteResult route = _routeResults[index];
       List<LatLng> allPoints = [route.startLocation];
       allPoints.addAll(route.allStops.map((stop) => stop.position));
       allPoints.add(route.endLocation);
-      
+
       LatLngBounds bounds = LatLngBounds.fromPoints(allPoints);
-      _mapController.fitCamera(CameraFit.bounds(bounds: bounds, padding: EdgeInsets.all(50)));
+      _mapController.fitCamera(
+          CameraFit.bounds(bounds: bounds, padding: EdgeInsets.all(50)));
     }
   }
 
@@ -790,20 +1165,17 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
               ),
             ],
           ),
-          
+
           // Enhanced search interface
           _buildSearchInterface(),
-          
+
           // Transportation mode selector
-          if (!_showRouteResults)
-            _buildTransportModeSelector(),
+          if (!_showRouteResults) _buildTransportModeSelector(),
 
           // Enhanced route results bottom sheet
-          if (_showRouteResults)
-            _buildRouteResultsSheet(),
+          if (_showRouteResults) _buildRouteResultsSheet(),
         ],
       ),
-      
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -827,20 +1199,27 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
 
   List<Polyline> _buildRoutePolylines() {
     if (_routeResults.isEmpty || !_showRouteResults) return [];
-    
+
     RouteResult selectedRoute = _routeResults[_selectedRouteIndex];
     List<Polyline> polylines = [];
-    
+
     // Walking path to first stop
     polylines.add(Polyline(
-      points: [selectedRoute.startLocation, selectedRoute.segments.first.startStop.position],
+      points: [
+        selectedRoute.startLocation,
+        selectedRoute.segments.first.startStop.position
+      ],
       strokeWidth: 4.0,
       color: Colors.green,
     ));
-    
+
     // Bus route segments with different colors
-    List<Color> segmentColors = [Colors.blue.shade600, Colors.purple.shade600, Colors.orange.shade600];
-    
+    List<Color> segmentColors = [
+      Colors.blue.shade600,
+      Colors.purple.shade600,
+      Colors.orange.shade600
+    ];
+
     for (int i = 0; i < selectedRoute.segments.length; i++) {
       RouteSegment segment = selectedRoute.segments[i];
       polylines.add(Polyline(
@@ -849,7 +1228,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         color: segmentColors[i % segmentColors.length],
       ));
     }
-    
+
     // Transfer walking path (if applicable)
     if (selectedRoute.hasTransfer && selectedRoute.segments.length > 1) {
       polylines.add(Polyline(
@@ -861,14 +1240,17 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         color: Colors.amber,
       ));
     }
-    
+
     // Walking path from last stop to destination
     polylines.add(Polyline(
-      points: [selectedRoute.segments.last.endStop.position, selectedRoute.endLocation],
+      points: [
+        selectedRoute.segments.last.endStop.position,
+        selectedRoute.endLocation
+      ],
       strokeWidth: 4.0,
       color: Colors.green,
     ));
-    
+
     return polylines;
   }
 
@@ -877,11 +1259,12 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
       // Show only relevant stops for selected route
       RouteResult selectedRoute = _routeResults[_selectedRouteIndex];
       List<Marker> markers = [];
-      
+
       for (int i = 0; i < selectedRoute.segments.length; i++) {
         RouteSegment segment = selectedRoute.segments[i];
-        Color segmentColor = i == 0 ? Colors.orange.shade700 : Colors.purple.shade700;
-        
+        Color segmentColor =
+            i == 0 ? Colors.orange.shade700 : Colors.purple.shade700;
+
         for (BusStop stop in segment.pathStops) {
           markers.add(Marker(
             point: stop.position,
@@ -909,7 +1292,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
           ));
         }
       }
-      
+
       // Special markers for transfer stops
       if (selectedRoute.hasTransfer && selectedRoute.transferStop != null) {
         markers.add(Marker(
@@ -937,39 +1320,42 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
           ),
         ));
       }
-      
+
       return markers;
     } else {
       // Show sample of all bus stops
-      return _busStops.take(30).map((stop) => Marker(
-        point: stop.position,
-        width: 24,
-        height: 24,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.orange.shade600,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 2,
-                offset: Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Icon(
-            Icons.directions_bus,
-            color: Colors.white,
-            size: 12,
-          ),
-        ),
-      )).toList();
+      return _busStops
+          .take(30)
+          .map((stop) => Marker(
+                point: stop.position,
+                width: 24,
+                height: 24,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.orange.shade600,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 2,
+                        offset: Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.directions_bus,
+                    color: Colors.white,
+                    size: 12,
+                  ),
+                ),
+              ))
+          .toList();
     }
   }
 
   List<Marker> _buildLocationMarkers() {
     List<Marker> markers = [];
-    
+
     // Current location marker
     if (_currentLocation != null) {
       markers.add(Marker(
@@ -997,7 +1383,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         ),
       ));
     }
-    
+
     // From location marker (if different from current)
     if (_fromLocation != null && _fromLocation != _currentLocation) {
       markers.add(Marker(
@@ -1018,7 +1404,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         ),
       ));
     }
-    
+
     // Destination marker
     if (_destination != null) {
       markers.add(Marker(
@@ -1039,7 +1425,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
         ),
       ));
     }
-    
+
     return markers;
   }
 
@@ -1085,7 +1471,8 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                         hintStyle: TextStyle(color: Colors.grey[600]),
                       ),
                       readOnly: _useCurrentLocation,
-                      onChanged: _useCurrentLocation ? null : _searchFromSuggestions,
+                      onChanged:
+                          _useCurrentLocation ? null : _searchFromSuggestions,
                       onTap: () {
                         if (!_useCurrentLocation) {
                           setState(() {
@@ -1109,7 +1496,9 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                       });
                     },
                     icon: Icon(
-                      _useCurrentLocation ? Icons.my_location : Icons.edit_location,
+                      _useCurrentLocation
+                          ? Icons.my_location
+                          : Icons.edit_location,
                       color: Colors.blue,
                     ),
                   ),
@@ -1123,14 +1512,14 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                 ],
               ),
             ),
-            
+
             // Divider
             Container(
               height: 1,
               color: Colors.grey[200],
               margin: EdgeInsets.symmetric(horizontal: 16),
             ),
-            
+
             // To field
             Padding(
               padding: EdgeInsets.all(16),
@@ -1172,7 +1561,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                 ],
               ),
             ),
-            
+
             // From suggestions
             if (_showFromSuggestions)
               Container(
@@ -1199,7 +1588,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                   },
                 ),
               ),
-            
+
             // To suggestions
             if (_showToSuggestions)
               Container(
@@ -1335,7 +1724,8 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                                 CircularProgressIndicator(),
                                 SizedBox(height: 16),
                                 Text('Finding optimal routes...'),
-                                Text('Checking all bus lines...', style: TextStyle(color: Colors.grey)),
+                                Text('Checking all bus lines...',
+                                    style: TextStyle(color: Colors.grey)),
                               ],
                             ),
                           )
@@ -1344,7 +1734,8 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(Icons.search_off, size: 50, color: Colors.grey),
+                                    Icon(Icons.search_off,
+                                        size: 50, color: Colors.grey),
                                     SizedBox(height: 16),
                                     Text(
                                       'No routes found',
@@ -1380,7 +1771,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
   Widget _buildEnhancedRouteCard(int index) {
     RouteResult route = _routeResults[index];
     bool isSelected = index == _selectedRouteIndex;
-    
+
     return GestureDetector(
       onTap: () => _selectRoute(index),
       child: Container(
@@ -1404,7 +1795,9 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: route.hasTransfer ? Colors.amber : (isSelected ? Colors.blue : Colors.orange),
+                      color: route.hasTransfer
+                          ? Colors.amber
+                          : (isSelected ? Colors.blue : Colors.orange),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -1441,7 +1834,8 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                       ),
                       if (index == 0)
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: Colors.green,
                             borderRadius: BorderRadius.circular(8),
@@ -1459,9 +1853,9 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                   ),
                 ],
               ),
-              
+
               SizedBox(height: 8),
-              
+
               // Time range and route info
               Row(
                 children: [
@@ -1492,31 +1886,35 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                     ),
                 ],
               ),
-              
+
               SizedBox(height: 12),
-              
+
               // Enhanced journey visualization
               _buildJourneyVisualization(route),
-              
+
               SizedBox(height: 12),
-              
+
               // Detailed breakdown
               Row(
                 children: [
-                  _buildTimeBreakdown(Icons.directions_walk, route.totalWalkingTime, 'Walk', Colors.green),
+                  _buildTimeBreakdown(Icons.directions_walk,
+                      route.totalWalkingTime, 'Walk', Colors.green),
                   SizedBox(width: 16),
-                  _buildTimeBreakdown(Icons.directions_bus, route.totalBusTime, 'Bus', Colors.blue),
+                  _buildTimeBreakdown(Icons.directions_bus, route.totalBusTime,
+                      'Bus', Colors.blue),
                   SizedBox(width: 16),
-                  _buildTimeBreakdown(Icons.access_time, route.totalWaitingTime, 'Wait', Colors.orange),
+                  _buildTimeBreakdown(Icons.access_time, route.totalWaitingTime,
+                      'Wait', Colors.orange),
                   if (route.hasTransfer) ...[
                     SizedBox(width: 16),
-                    _buildTimeBreakdown(Icons.transfer_within_a_station, 10, 'Transfer', Colors.amber),
+                    _buildTimeBreakdown(Icons.transfer_within_a_station, 10,
+                        'Transfer', Colors.amber),
                   ],
                 ],
               ),
-              
+
               SizedBox(height: 12),
-              
+
               // Distance info
               Container(
                 padding: EdgeInsets.all(8),
@@ -1542,9 +1940,9 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
                   ],
                 ),
               ),
-              
+
               SizedBox(height: 8),
-              
+
               // Instructions
               Container(
                 padding: EdgeInsets.all(8),
@@ -1580,15 +1978,15 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
             child: _buildJourneyStep(
               Icons.directions_walk,
               'Walk to\n${route.segments.first.startStop.name}',
-              '${route.totalWalkingTime ~/2} min',
+              '${route.totalWalkingTime ~/ 2} min',
               Colors.green,
               isStart: true,
             ),
           ),
-          
+
           // Arrow
           Icon(Icons.arrow_forward, color: Colors.grey[400], size: 16),
-          
+
           // First bus segment
           Expanded(
             flex: 3,
@@ -1599,7 +1997,7 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
               Colors.blue,
             ),
           ),
-          
+
           // Transfer section (if applicable)
           if (route.hasTransfer) ...[
             Icon(Icons.arrow_forward, color: Colors.grey[400], size: 16),
@@ -1623,17 +2021,17 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
               ),
             ),
           ],
-          
+
           // Arrow
           Icon(Icons.arrow_forward, color: Colors.grey[400], size: 16),
-          
+
           // Walk to destination
           Expanded(
             flex: 2,
             child: _buildJourneyStep(
               Icons.directions_walk,
               'Walk to\nDestination',
-              '${route.totalWalkingTime - (route.totalWalkingTime ~/2)} min',
+              '${route.totalWalkingTime - (route.totalWalkingTime ~/ 2)} min',
               Colors.green,
               isEnd: true,
             ),
@@ -1643,7 +2041,8 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
     );
   }
 
-  Widget _buildTimeBreakdown(IconData icon, int time, String label, Color color) {
+  Widget _buildTimeBreakdown(
+      IconData icon, int time, String label, Color color) {
     return Column(
       children: [
         Icon(icon, color: color, size: 16),
@@ -1683,7 +2082,9 @@ class _BusRouteHomePageState extends State<BusRouteHomePage>
     );
   }
 
-  Widget _buildJourneyStep(IconData icon, String label, String duration, Color color, {bool isStart = false, bool isEnd = false}) {
+  Widget _buildJourneyStep(
+      IconData icon, String label, String duration, Color color,
+      {bool isStart = false, bool isEnd = false}) {
     return Container(
       padding: EdgeInsets.all(6),
       decoration: BoxDecoration(
